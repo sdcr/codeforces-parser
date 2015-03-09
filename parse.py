@@ -17,7 +17,7 @@ from functools import partial, wraps
 import re
  
 # User modifiable constants:
-TEMPLATE='main.cc'
+TEMPLATE='main.cpp'
 COMPILE_CMD='g++ -g -std=c++0x -Wall $DBG'
 SAMPLE_INPUT='input'
 SAMPLE_OUTPUT='output'
@@ -151,7 +151,7 @@ def generate_test_script(folder, num_tests, problem):
             '  esac\n'
             'done\n'
             '\n'
-            'if ! '+COMPILE_CMD+' {0}.cc; then\n'
+            'if ! '+COMPILE_CMD+' {0}.cpp; then\n'
             '    exit\n'
             'fi\n'
             'INPUT_NAME='+SAMPLE_INPUT+'\n'
@@ -208,7 +208,7 @@ def main():
         print ('Downloading Problem %s: %s...' % (problem, content.problem_names[index]))
         folder = '%s/%s/' % (contest, problem)
         call(['mkdir', '-p', folder])
-        call(['cp', '-n', TEMPLATE, '%s/%s/%s.cc' % (contest, problem, problem)])
+        call(['cp', '-n', TEMPLATE, '%s/%s/%s.cpp' % (contest, problem, problem)])
         num_tests = parse_problem(folder, contest, problem)
         print('%d sample test(s) found.' % num_tests)
         generate_test_script(folder, num_tests, problem)
