@@ -94,14 +94,14 @@ class CodeforcesContestParser(HTMLParser):
         if self.name == '' and attrs == [('style', 'color: black'), ('href', '/contest/%s' % (self.contest))]:
                 self.start_contest = True
         elif tag == 'option':
-            if len(attrs) == 1:
-                regexp = re.compile(r"u'[A-Z].*'")
-                string = str(attrs[0])
+            if len(attrs) == 2:
+                regexp = re.compile(r"[A-Z]$")
+                string = str(attrs[0][1])
                 search = regexp.search(string)
                 if search is not None:
-                    self.problems.append(search.group(0).split("'")[-2])
+                    self.problems.append(search.group(0))
                     self.start_problem = True
- 
+
     def handle_endtag(self, tag):
         if tag == 'a' and self.start_contest:
             self.start_contest = False
